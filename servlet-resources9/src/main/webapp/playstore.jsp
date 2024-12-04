@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,61 +88,78 @@
 
 <!-- Navigation Bar -->
 <div class="navbar">
-    <a href="https://play.google.com/store" target="_blank">Play Store Home</a>
-    <a href="https://play.google.com/store/apps" target="_blank">Apps</a>
-    <a href="https://play.google.com/store/movies" target="_blank">Movies</a>
-    <a href="https://play.google.com/store/books" target="_blank">Books</a>
+    <a href="https://play.google.com/store" target="playapp.jpeg">Play Store Home</a>
+    <a href="https://play.google.com/store/apps" target="app-icon-cover.jpg">Apps</a>
+    <a href="https://play.google.com/store/movies" target="movies.png">Movies</a>
+    <a href="https://play.google.com/store/books" target="books.jpg">Books</a>
 </div>
 
 <!-- Login Form -->
 <div class="container">
     <h2>Login Details</h2>
-    <form action="login" method="post">
+    <form action="login" method="get" id="loginForm">
         <label for="userName">Given Name:</label>
         <input type="text" name="userName" required>
-
-        <label for="dob">Date of Birth:</label>
-        <input type="date" name="dob" required>
-
-        <label for="email">Email:</label>
-        <input type="email" name="email" required>
 
         <label for="surName">Surname:</label>
         <input type="text" name="surName">
 
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob" required>
+
+        <label for="gender">Gender:</label>
+        <select name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required>
+
         <label for="number">Phone Number:</label>
         <input type="text" name="number" required>
 
-        <label for="gender">Gender:</label>
-        <input type="text" name="gender">
-
         <label for="pwd">Password:</label>
-        <input type="password" name="pwd" required>
+        <input type="password" name="pwd" id="password" required>
 
         <label for="confirmPwd">Confirm Password:</label>
-        <input type="password" name="confirmPwd" required>
+        <input type="password" name="confirmPwd" id="confirmPassword" required>
 
         <label for="hideAns">Hide Answer:</label>
         <input type="text" name="hideAns">
 
         <label for="captcha">Captcha:</label>
-        <input type="text" name="captcha">
+        <input type="text" name="captcha" required>
 
         <input type="submit" value="SUBMIT">
     </form>
+
+    <div id="errorMessage" style="color: red; display: none;">Passwords do not match!</div>
 </div>
 
-<!-- Play Store Images -->
-<div class="playstore-images">
-    <img src="playstore-logo1.png" alt="Play Store Logo">
-    <img src="playstore-logo2.png" alt="Play Store Apps">
-    <img src="playstore-logo3.png" alt="Play Store Books">
-</div>
+<script>
+    // Password and Confirm Password Validation
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            event.preventDefault();  // Prevent form submission
+            document.getElementById('errorMessage').style.display = 'block'; // Show error message
+        } else {
+            document.getElementById('errorMessage').style.display = 'none'; // Hide error message if passwords match
+        }
+    });
+</script>
+
 
 <!-- Next Page Link -->
 <div class="next-page">
     <a href="nextPage.html">Click here to open the next page</a>
 </div>
+
 
 </body>
 </html>

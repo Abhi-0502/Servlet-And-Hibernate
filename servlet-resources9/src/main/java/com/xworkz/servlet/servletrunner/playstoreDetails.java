@@ -6,6 +6,7 @@ import com.xworkz.servlet.dto.PlayStoreDto;
 import com.xworkz.servlet.service.PlayStoreService;
 import com.xworkz.servlet.service.PlayStoreServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,11 +19,15 @@ import java.io.PrintWriter;
 
 public class playstoreDetails extends HttpServlet {
 
+    public playstoreDetails(){
+        System.out.println("Object is created");
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        String userName = req.getParameter("userName");
+    String userName = req.getParameter("userName");
         String surname= req.getParameter("surName");
         String gender = req.getParameter("gender");
         String dob =req.getParameter( "dob");
@@ -40,16 +45,35 @@ public class playstoreDetails extends HttpServlet {
 
         PlayStoreDto dto = new PlayStoreDto();
         dto.setUserName(userName);
-        dto.setNumber(Integer.parseInt(number));
+        dto.setSurName(surname);
+        dto.setDob(dob);
         dto.setGender(gender);
+        dto.setNumber(Integer.parseInt(number));
+        dto.setEmail(email);
         dto.setPwd(pwd);
         dto.setHideAns(ans);
         dto.setConfirmPwd(conpwd);
         dto.setCaptcha(captcha);
 
-        PlayStoreDao playStoreDao = new PlayStoreDaoImpl();
-        PlayStoreService playStoreService = new PlayStoreServiceImpl();
-        playStoreService.validateAndSavePassport(dto);
+        System.out.println("DoPost method created");
+        String value = req.getParameter("firstName");
+        //request scope
+        req.setAttribute("key", value);
+        req.setAttribute("msg","abhi");
+        //Servlet chaining
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("response.jsp");
+        requestDispatcher.forward(req, resp);
+        System.out.println("doPost method ended");
+
+//        PlayStoreDao playStoreDao = new PlayStoreDaoImpl();
+//        PlayStoreService playStoreService = new PlayStoreServiceImpl();
+//        playStoreService.validateAndSavePassport(dto);
+//        PlayStoreDto getProductById = playStoreService.getProductById(56);
+//
+
+
+
+
 
     }
 }

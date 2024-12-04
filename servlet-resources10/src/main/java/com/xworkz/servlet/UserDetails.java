@@ -6,6 +6,7 @@ import com.xworkz.servlet.dto.UserDto;
 import com.xworkz.servlet.service.UserService;
 import com.xworkz.servlet.service.UserServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,6 +42,16 @@ public class UserDetails extends HttpServlet {
         userDto.setDob(Integer.parseInt(DoB));
         userDto.setPassword(Long.parseLong(password));
 
+
+        System.out.println("doPost method created");
+        String value = req.getParameter("firstName");
+        //request scope
+        req.setAttribute("key", value);
+        req.setAttribute("msg","abhi");
+        //Servlet chaining
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("response.jsp");
+        requestDispatcher.forward(req, resp);
+        System.out.println("doPost method ended");
         UserDao userDao = new UserDaoImpl();
         UserService userServices = new UserServiceImpl();
        // userServices.validateAndSaveUserLogin(userDto);

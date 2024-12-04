@@ -4,11 +4,15 @@ import com.xworkz.servlet.dao.PlayStoreDao;
 import com.xworkz.servlet.dao.PlayStoreDaoImpl;
 import com.xworkz.servlet.dto.PlayStoreDto;
 
+import java.util.Collections;
+import java.util.List;
+
 public class PlayStoreServiceImpl implements PlayStoreService {
 
     boolean userAdded = false;
 
     PlayStoreDao playStoreDao = new PlayStoreDaoImpl();
+
     @Override
     public boolean validateAndSavePassport(PlayStoreDto playStoreDto) {
         if (playStoreDto != null) {
@@ -29,7 +33,7 @@ public class PlayStoreServiceImpl implements PlayStoreService {
 
             // Check if both fields are valid
             if (UserNameValid && emailValid) {
-                userAdded =playStoreDao.addPlayStore(playStoreDto);
+                userAdded = playStoreDao.addPlayStore(playStoreDto);
                 System.out.println("service info :" + playStoreDto);
                 if (userAdded) {
                     System.out.println("All fields are validated successfully and user added.");
@@ -45,5 +49,29 @@ public class PlayStoreServiceImpl implements PlayStoreService {
         return userAdded;
     }
 
+    @Override
+    public PlayStoreDto getProductById(int id) {
+        if (id > 0) {
+            System.out.println("get the details of playStoreId");
+
+        }
+        return playStoreDao.getProductById(id);
     }
+
+    @Override
+    public PlayStoreDto getUserByUserName(String userName) {
+        if(userName != null && !userName.isEmpty()){
+            System.out.println("userName added");
+        }
+        return playStoreDao.getUserByUserName(userName);
+    }
+
+    @Override
+    public List<PlayStoreDto> getAllUser() {
+        System.out.println("get AllUser is added");
+        return playStoreDao.getAllUser();
+    }
+    }
+
+
 

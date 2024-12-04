@@ -1,9 +1,12 @@
 <html>
 <body>
 <h2>Adding Details</h2>
-    <form action="login" method= "post">
+<br>
+    <form action="login" method= "post"></br>
+    <br>
     Name:<input type = "text" name = "userName"></br>
-    <input type = "submit" value = "SUBIT">
+    <br>
+    <input type = "submit" value = "SUBIT"></br>
     </form>
 </body>
 </html>
